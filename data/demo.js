@@ -215,3 +215,15 @@ const asyncRoutes = [
 const routes = filterAsyncRoutes(asyncRoutes,menu)
 console.log(JSON.stringify(routes,null,4))
 
+const flatArrayObj = function (arr) {
+  let res = []
+  arr.forEach(item => {
+    if (item.children && item.children.length > 0) {
+      const tmp = flatArrayObj(item.children)
+      res = res.concat(JSON.parse(JSON.stringify(tmp)))
+    } else {
+      res.push(item)
+    }    
+  })
+  return res
+}
